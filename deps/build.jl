@@ -11,9 +11,9 @@ run(`mkdir folder1`)
 run(`mkdir folder2`)
 if haskey(ENV, "MYTEST")
     println("Found environment variable")
-    #precision = ENV["QuEST_PREC"]
+    precision = ENV["MYTEST"]
     run(`touch test.txt`)
-    run(`echo precision '>>' test.txt`)
+    run(pipeline(`echo precision`,`test.txt`))
     #cmake -DQuEST_PREC=$precision
 else
     println("Didn't find env var")
