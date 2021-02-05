@@ -7,8 +7,8 @@ if Sys.isunix() && Sys.islinux()
 end
 
 #git clone https://github.com/quest-kit/QuEST
-mkdir folder1
-mkdir folder2
+run(`mkdir folder1`)
+run(`mkdir folder2`)
 if haskey(ENV, "MYTEST")
     println("Found environment variable")
     precision = ENV["QuEST_PREC"]
