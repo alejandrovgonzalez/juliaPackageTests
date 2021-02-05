@@ -10,7 +10,7 @@ end
 if haskey(ENV, "MYTEST")
     precision = ENV["MYTEST"]
     run(`mkdir build1`)
-    cd(build1)
+    cd("build1")
     run(`cmake -DQuEST_PREC=$precision ..`)
     run(`make`)
     cd(..)
