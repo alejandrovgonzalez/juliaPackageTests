@@ -1,3 +1,4 @@
+println("Update test...")
 println("Building package")
 x = Sys.ARCH
 if string(x) == "x86_64"
