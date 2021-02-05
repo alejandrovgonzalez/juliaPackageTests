@@ -13,7 +13,8 @@ if haskey(ENV, "MYTEST")
     println("Found environment variable")
     precision = ENV["MYTEST"]
     run(`touch test.txt`)
-    run(pipeline(`echo precision`,`test.txt`))
+    println(precision)
+    #run(pipeline(`echo precision`,`test.txt`))
     #cmake -DQuEST_PREC=$precision
 else
     println("Didn't find env var")
