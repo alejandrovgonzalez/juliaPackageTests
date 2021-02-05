@@ -1,5 +1,4 @@
-println("Second commit")
-println("Building package")
+println("Building package...")
 arch = Sys.ARCH
 
 if Sys.isunix() && Sys.islinux()
@@ -7,16 +6,22 @@ if Sys.isunix() && Sys.islinux()
 end
 
 #git clone https://github.com/quest-kit/QuEST
-run(`mkdir folder1`)
-run(`mkdir folder2`)
+
 if haskey(ENV, "MYTEST")
-    println("Found environment variable")
     precision = ENV["MYTEST"]
-    run(`touch test.txt`)
-    println(precision)
+    run(`mkdir build1`)
+    run(`cd build1`)
+    run(`cmake -DQuEST_PREC=$precision ..`)
+    run(`make`)
+    run(`mkdir build2`)
+    run(`cd build1`)
+    run(`cmake ..`)
+    run(`make`)
+    #println("Found environment variable")
+    #run(`touch test.txt`)
+    #println(precision)
     #run(pipeline(`echo precision`,`test.txt`))
     #cmake -DQuEST_PREC=$precision
 else
     println("Didn't find env var")
-    #cmake
 end
