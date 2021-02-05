@@ -6,7 +6,7 @@ if Sys.isunix() && Sys.islinux()
     println("cool!")
 end
 
-git clone https://github.com/quest-kit/QuEST
+#git clone https://github.com/quest-kit/QuEST
 mkdir folder1
 mkdir folder2
 if haskey(ENV, "MYTEST")
