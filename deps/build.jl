@@ -1,8 +1,8 @@
-println("Update test...")
+println("Second commit")
 println("Building package")
-x = Sys.ARCH
-if string(x) == "x86_64"
-    println("64")
+arch = Sys.ARCH
+if Symbol(x86_64) == arch
+    error("64")
 else
     error("Not 64")
 end
