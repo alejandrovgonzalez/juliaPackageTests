@@ -3,16 +3,16 @@ arch = Sys.ARCH
 
 function build(precision::Int, isWindows::Bool)::Nothing
     # Check if QuEST is already cloned
-    if !ispath("./QuEST")
-        # run(`git clone git@github.com:QuEST-Kit/QuEST.git`)
-        # cd("QuEST")
-        # run(`mkdir build`)
-        # cd("build")
+    if !ispath("./QuEST") && size(readdir("testt"))[0]
+        run(`git clone git@github.com:QuEST-Kit/QuEST.git`)
+        cd("QuEST")
+        run(`mkdir build`)
+        cd("build")
     end
 
-    # isWindows ? run(`cmake -DPRECISION=$precision .. -G "MinGW Makefiles"`) :
-    #            run(`cmake -DPRECISION=$precision ..`)
-    # wait(run(`make`))
+    isWindows ? run(`cmake -DPRECISION=$precision .. -G "MinGW Makefiles"`) :
+                run(`cmake -DPRECISION=$precision ..`)
+    wait(run(`make`))
 end
 
 
@@ -34,13 +34,16 @@ end
 # end
 run(`mkdir testt`)
 fs = readdir("testt")
-println(size(fs))
+cd("testt")
+run(`touch hola.txt`)
+cd("..")
+println(fs.size())
 
 
 if Symbol("x86_64") == arch && Sys.isunix()
     println("Correct if!")
     # cd("/home/hopery/Documents/job/testing/QuEST/build")
-    build(2, false)
+    # build(2, false)
 elseif Symbol("x86_64") == arch && Sys.iswindows()
     build(2, true)
 elseif Symbol("x86_32") == arch && Sys.isunix()
