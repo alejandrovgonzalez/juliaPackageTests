@@ -1,15 +1,11 @@
 println("Building package...")
-arch = Sys.ARCH
 
-if Sys.isunix() && Sys.islinux()
-    println("cool!")
-end
-
-run(`git clone git@github.com:QuEST-Kit/QuEST.git`)
-if ispath("./QuEST")
+# Check if QuEST is already cloned
+if !ispath("./QuEST")
     run(`git clone git@github.com:QuEST-Kit/QuEST.git`)
 end
 
+# Example of environment variable handling
 if haskey(ENV, "MYTEST")
     println("Found env var")
     precision = ENV["MYTEST"]
@@ -22,11 +18,8 @@ if haskey(ENV, "MYTEST")
     cd(build2)
     run(`cmake ..`)
     run(`make`)
-    # println("Found environment variable")
-    # run(`touch test.txt`)
-    # println(precision)
-    # run(pipeline(`echo precision`,`test.txt`))
-    # cmake -DQuEST_PREC=$precision
 else
     println("Didn't find env var")
 end
+
+println("Building process finished.")
