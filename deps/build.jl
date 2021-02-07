@@ -6,6 +6,7 @@ if Sys.isunix() && Sys.islinux()
 end
 
 run(`git clone git@github.com:QuEST-Kit/QuEST.git`)
+run(`git clone git@github.com:QuEST-Kit/QuEST.git`)
 
 if haskey(ENV, "MYTEST")
     println("Found env var")
