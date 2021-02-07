@@ -4,15 +4,15 @@ arch = Sys.ARCH
 function build(precision::Int, isWindows::Bool)::Nothing
     # Check if QuEST is already cloned
     if !ispath("./QuEST")
-        run(`git clone git@github.com:QuEST-Kit/QuEST.git`)
-        cd("QuEST")
-        run(`mkdir build`)
-        cd("build")
+        # run(`git clone git@github.com:QuEST-Kit/QuEST.git`)
+        # cd("QuEST")
+        # run(`mkdir build`)
+        # cd("build")
     end
 
-    isWindows ? run(`cmake -DPRECISION=$precision .. -G "MinGW Makefiles"`) :
-                run(`cmake -DPRECISION=$precision ..`)
-    wait(run(`make`))
+    # isWindows ? run(`cmake -DPRECISION=$precision .. -G "MinGW Makefiles"`) :
+    #            run(`cmake -DPRECISION=$precision ..`)
+    # wait(run(`make`))
 end
 
 
