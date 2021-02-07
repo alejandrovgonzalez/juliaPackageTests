@@ -12,7 +12,7 @@ function build(precision::Int, isWindows::Bool)::Nothing
 
     isWindows ? run(`cmake -DPRECISION=$precision .. -G "MinGW Makefiles"`) :
                 run(`cmake -DPRECISION=$precision ..`)
-    run(`make`)
+    wait(run(`make`))
 end
 
 
