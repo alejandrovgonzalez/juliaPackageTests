@@ -8,6 +8,7 @@ end
 run(`git clone git@github.com:QuEST-Kit/QuEST.git`)
 
 if haskey(ENV, "MYTEST")
+    println("Found env var")
     precision = ENV["MYTEST"]
     run(`mkdir build1`)
     cd("build1")
@@ -18,11 +19,11 @@ if haskey(ENV, "MYTEST")
     cd(build2)
     run(`cmake ..`)
     run(`make`)
-    #println("Found environment variable")
-    #run(`touch test.txt`)
-    #println(precision)
-    #run(pipeline(`echo precision`,`test.txt`))
-    #cmake -DQuEST_PREC=$precision
+    # println("Found environment variable")
+    # run(`touch test.txt`)
+    # println(precision)
+    # run(pipeline(`echo precision`,`test.txt`))
+    # cmake -DQuEST_PREC=$precision
 else
     println("Didn't find env var")
 end
