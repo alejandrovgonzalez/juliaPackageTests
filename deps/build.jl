@@ -33,10 +33,10 @@ end
 #    println("Didn't find env var")
 # end
 run(`mkdir testt`)
-fs = readdir("testt")
 cd("testt")
 run(`touch hola.txt`)
 cd("..")
+fs = readdir("testt")
 println(size(fs))
 
 
