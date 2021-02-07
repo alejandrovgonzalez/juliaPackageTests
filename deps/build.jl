@@ -34,7 +34,7 @@ end
 # end
 run(`mkdir testt`)
 fs = readdir("testt")
-println(fs.size())
+println(size(fs))
 
 
 if Symbol("x86_64") == arch && Sys.isunix()
