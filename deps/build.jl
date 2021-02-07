@@ -32,6 +32,10 @@ end
 # else
 #    println("Didn't find env var")
 # end
+run(`mkdir testt`)
+fs = readdir("testt")
+println(fs.size())
+
 
 if Symbol("x86_64") == arch && Sys.isunix()
     println("Correct if!")
