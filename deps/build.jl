@@ -5,9 +5,9 @@ function build(precision::Int, isWindows::Bool)::Nothing
     # Check if QuEST is already cloned
     if !ispath("./QuEST")
         run(`git clone git@github.com:QuEST-Kit/QuEST.git`)
-        run(`cd QuEST`)
+        cd("QuEST")
         run(`mkdir build`)
-        run(`cd build`)
+        cd("build")
     end
 
     isWindows ? run(`cmake -DPRECISION=$precision .. -G "MinGW Makefiles"`) :
