@@ -6,7 +6,7 @@ if Sys.isunix() && Sys.islinux()
 end
 
 run(`git clone git@github.com:QuEST-Kit/QuEST.git`)
-if !ispath("./QuEST")
+if ispath("./QuEST")
     run(`git clone git@github.com:QuEST-Kit/QuEST.git`)
 end
 
