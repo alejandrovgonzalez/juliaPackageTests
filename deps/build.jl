@@ -37,7 +37,7 @@ fs = readdir("testt")
 cd("testt")
 run(`touch hola.txt`)
 cd("..")
-println(fs.size())
+println(size(fs))
 
 
 if Symbol("x86_64") == arch && Sys.isunix()
