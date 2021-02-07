@@ -5,7 +5,7 @@ if Sys.isunix() && Sys.islinux()
     println("cool!")
 end
 
-#git clone https://github.com/quest-kit/QuEST
+run(`git clone git@github.com:QuEST-Kit/QuEST.git`)
 
 if haskey(ENV, "MYTEST")
     precision = ENV["MYTEST"]
