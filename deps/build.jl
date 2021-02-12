@@ -10,20 +10,21 @@ function build(precision::Int, isWindows::Bool)::Nothing
                 wait(run(`cmake -DPRECISION=$precision ..`))
     wait(run(`make`))
 end
-
-if !ispath("./QuEST") || isempty(readdir("./QuEST"))
-    println("Is empty!")
-
-    if Symbol("x86_64") == arch && Sys.isunix()
-        build(2, false)
-    elseif Symbol("x86_64") == arch && Sys.iswindows()
-        build(2, true)
-    elseif Symbol("x86_32") == arch && Sys.isunix()
-        build(1, false)
-    elseif Symbol("x86_32") == arch && Sys.iswindows()
-        build(1, true)
-    else
-        error("Architecture/OS not supported.")
+if !haskey(ENV, "QUEST_EXPERT")
+    @info "QUEST_EXPERT environment variable not found."
+    if !ispath("./QuEST") || isempty(readdir("./QuEST"))
+        if Symbol("x86_64") == arch && Sys.isunix()
+            build(2, false)
+        elseif Symbol("x86_64") == arch && Sys.iswindows()
+            build(2, true)
+        elseif Symbol("x86_32") == arch && Sys.isunix()
+            build(1, false)
+        elseif Symbol("x86_32") == arch && Sys.iswindows()
+            build(1, true)
+        else
+            error("Architecture/OS not supported.")
+        end
     end
-
-end
+else
+    @info "QUEST_EXPERT environment variable found."
+end 
