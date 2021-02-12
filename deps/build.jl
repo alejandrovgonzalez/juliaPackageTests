@@ -2,9 +2,9 @@ arch = Sys.ARCH
 expert = haskey(ENV, "QUEST_EXPERT2") ? ENV["QUEST_EXPERT2"] : false
 
 if expert || expert == "1"
-    @debug "expert"
+    @info "expert"
 else
-    @debug "not expert"
+    @info "not expert"
 end
 function build(precision::Int, isWindows::Bool)::Nothing
     run(`git clone https://github.com/QuEST-Kit/QuEST.git`)
