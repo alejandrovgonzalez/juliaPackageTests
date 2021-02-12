@@ -1,11 +1,11 @@
 arch = Sys.ARCH
 expert = haskey(ENV, "QUEST_EXPERT2") ? ENV["QUEST_EXPERT2"] : false
 
-if expert || expert=="1"
+if expert || expert == "1"
     @debug "expert"
 else
     @debug "not expert"
-
+end
 function build(precision::Int, isWindows::Bool)::Nothing
     run(`git clone https://github.com/QuEST-Kit/QuEST.git`)
     cd("QuEST")
@@ -17,7 +17,7 @@ function build(precision::Int, isWindows::Bool)::Nothing
     wait(run(`make`))
 end
 
-if 
+if false
     @info "QUEST_EXPERT environment variable not found."
     if !ispath("./QuEST") || isempty(readdir("./QuEST"))
         if Symbol("x86_64") == arch && Sys.isunix()
