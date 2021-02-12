@@ -1,7 +1,7 @@
 arch = Sys.ARCH
-expert = haskey(ENV, "QUEST_EXPERT2") ? ENV["QUEST_EXPERT2"] : false
+expert = haskey(ENV, "QUEST_EXPERT2") ? ENV["QUEST_EXPERT2"] == "0" ? false : true : false
 
-if expert || expert == "1"
+if expert
     @info "expert"
 else
     @info "not expert"
