@@ -3,6 +3,7 @@ expert = haskey(ENV, "QUEST_EXPERT") && ENV["QUEST_EXPERT"] == "1" ? true : fals
 @info "Info"
 @warn "Warn"
 @error "Error"
+show("Show")
 
 
 # Execute commands to build QuEST
