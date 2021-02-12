@@ -1,37 +1,38 @@
-arch = Sys.ARCH
-expert = haskey(ENV, "QUEST_EXPERT3") && ENV["QUEST_EXPERT3"] == "1" ? true : false
+expert = haskey(ENV, "QUEST_EXPERT") && ENV["QUEST_EXPERT"] == "1" ? true : false 
+@debug "Debug"
+@info "Info"
+@warn "Warn"
+@error "Error"
 
-if expert
-    @info "expert"
-else
-    @info "not expert"
+
+# Execute commands to build QuEST
+function _auxBuild(makePrecision::Int, precision::String, isWindows::Bool)::Nothing
+    mkdir("build" * precision)
+    cd("build" * precision)
+
+    isWindows ? wait(run(`cmake -DPRECISION=$makePrecision .. -G "MinGW Makefiles"`)) :
+                wait(run(`cmake -DPRECISION=$makePrecision ..`))
+    wait(run(`make`))
+    cd("..")
 end
-function build(precision::Int, isWindows::Bool)::Nothing
+
+# Clone repository and build
+function build(isWindows::Bool)::Nothing
     run(`git clone https://github.com/QuEST-Kit/QuEST.git`)
     cd("QuEST")
-    mkdir("build")
-    cd("build")
-
-    isWindows ? wait(run(`cmake -DPRECISION=$precision .. -G "MinGW Makefiles"`)) :
-                wait(run(`cmake -DPRECISION=$precision ..`))
-    wait(run(`make`))
+    _auxBuild(1, "32", isWindows)
+    _auxBuild(2, "64", isWindows)
+    @info "Build successful."
 end
 
-if false
-    @info "QUEST_EXPERT environment variable not found."
-    if !ispath("./QuEST") || isempty(readdir("./QuEST"))
-        if Symbol("x86_64") == arch && Sys.isunix()
-            build(2, false)
-        elseif Symbol("x86_64") == arch && Sys.iswindows()
-            build(2, true)
-        elseif Symbol("x86_32") == arch && Sys.isunix()
-            build(1, false)
-        elseif Symbol("x86_32") == arch && Sys.iswindows()
-            build(1, true)
-        else
-            error("Architecture/OS not supported.")
-        end
+if !expert && (!ispath("./QuEST") || isempty(readdir("./QuEST")))
+
+    if Sys.isunix()
+        build(false)
+    elseif Sys.iswindows()
+        build(true)
+    else
+        error("OS not supported.")
     end
-else
-    @info "QUEST_EXPERT environment variable found."
-end 
+
+end
