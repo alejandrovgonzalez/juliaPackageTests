@@ -19,7 +19,11 @@ end
 
 # Clone repository and build
 function build(isWindows::Bool)::Nothing
-    run(`git clone https://github.com/QuEST-Kit/QuEST.git`)
+    try
+        run(`git clone https://github.com/QuEST-Kit/QuEST.git`)
+    catch err
+        throw(error("Git failed.")) # What to do on error.
+    end
     cd("QuEST")
     _auxBuild(1, "32", isWindows)
     _auxBuild(2, "64", isWindows)
