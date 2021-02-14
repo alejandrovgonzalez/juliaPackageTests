@@ -6,7 +6,7 @@ function _auxBuild(makePrecision::Int, precision::String, isWindows::Bool)::Noth
     mkdir("build" * precision)
     cd("build" * precision)
 
-    isWindows ? wait(run(`cmake -DPRECISION=$makePrecision .. -G "MinGW Makefiles"`)) :
+    isWindows ? wait(run(`cmake -DPRECISION=$makePrecision .. -G \"MinGW Makefiles\"`)) :
                 wait(run(`cmake -DPRECISION=$makePrecision ..`))
     wait(run(`make`))
     cd("..")
