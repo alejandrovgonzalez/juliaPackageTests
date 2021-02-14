@@ -1,11 +1,11 @@
 expert = haskey(ENV, "QUEST_EXPERT") && ENV["QUEST_EXPERT"] == "1" ? true : false 
-
+gw = "MinGW Makefiles"
 # Execute commands to build QuEST
 function _auxBuild(makePrecision::Int,precision::String,isWindows::Bool)::Nothing
     mkdir("build"*precision)
     cd("build"*precision)
 
-    isWindows ? wait(run(`cmake -DPRECISION=$makePrecision .. -G \"MinGW Makefiles\"`)) :
+    isWindows ? wait(run(`cmake -DPRECISION=$makePrecision .. -G $gw`)) :
                 wait(run(`cmake -DPRECISION=$makePrecision ..`))
     wait(run(`make`))
     cd("..")
