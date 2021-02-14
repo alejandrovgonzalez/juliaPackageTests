@@ -1,5 +1,4 @@
 expert = haskey(ENV, "QUEST_EXPERT") && ENV["QUEST_EXPERT"] == "1" ? true : false 
-throw(error("Git failed."))
 
 # Execute commands to build QuEST
 function _auxBuild(makePrecision::Int, precision::String, isWindows::Bool)::Nothing
